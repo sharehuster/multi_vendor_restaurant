@@ -35,6 +35,9 @@ def registerUser(request):
             # objects là một quản lý (manager) mặc định của model User, cung cấp các phương thức truy vấn để làm việc với cơ sở dữ liệu
             user.role = User.CUSTOMER
             user.save()
+        else:
+            print('invalid form')
+            print(form.errors)
 
     else:
         form = UserForm()
