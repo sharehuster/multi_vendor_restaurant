@@ -2,6 +2,7 @@ from django.http import HttpResponse
 from django.shortcuts import redirect, render
 from .forms import UserForm
 from .models import User
+from django.contrib import messages
 
 # Create your views here.
 
@@ -35,6 +36,8 @@ def registerUser(request):
             # objects là một quản lý (manager) mặc định của model User, cung cấp các phương thức truy vấn để làm việc với cơ sở dữ liệu
             user.role = User.CUSTOMER
             user.save()
+            messages.success(request, 'Your account has been registered successfully')
+            return redirect('registerUser')
         else:
             print('invalid form')
             print(form.errors)
