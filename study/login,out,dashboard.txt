@@ -1,0 +1,2 @@
+IS ACTIVE : when verified email
+for test login -> set to be true
