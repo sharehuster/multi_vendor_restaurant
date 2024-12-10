@@ -1,7 +1,7 @@
 from django.http import HttpResponse
 from django.shortcuts import redirect, render
 
-from accounts.utils import detectUser
+from accounts.utils import detectUser, send_verification_email
 from vendor.forms import VendorForm
 from .forms import UserForm
 from .models import User, UserProfile
@@ -60,6 +60,10 @@ def registerUser(request):
             # objects là một quản lý (manager) mặc định của model User, cung cấp các phương thức truy vấn để làm việc với cơ sở dữ liệu
             user.role = User.CUSTOMER
             user.save()
+
+            # send_verification_email
+            send_verification_email(request, user)
+
             messages.success(request, 'Your account has been registered successfully')
             return redirect('registerUser')
         else:
@@ -100,6 +104,9 @@ def registerVendor(request):
             vendor.user_profile = user_profile
             vendor.save()
 
+            # send_verification_email
+            send_verification_email(request, user)
+
             messages.success(request, 'Your account has been registered sucessfully! Please wait for the approval.')
             return redirect('registerVendor')
         else:
@@ -115,6 +122,10 @@ def registerVendor(request):
     }
     return render(request, 'accounts/registerVendor.html', context)
 
+
+def activate(request, uidb64, token):
+    # Activate the use by setting the is_activate status to True
+    return
 
 def login(request):
     if request.user.is_authenticated:
