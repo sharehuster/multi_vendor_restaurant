@@ -1,12 +1,10 @@
-{% extends "base.html" %}
-{% load static %}
-{% include "includes/alerts.html" %}
+{% extends 'base.html' %}
 
+{% load static %}
 
 {% block content %}
+{% include 'includes/alerts.html' %}
 
-{% comment %} <h4> WELCOME {{user.username}} </h4>
-<p> This is a {{user.get_role}} </p> {% endcomment %}
 
 <!-- Main Section Start -->
 <div class="main-section">
@@ -15,7 +13,6 @@
         <div class="container">
             <div class="row">
                 <div class="col-lg-3 col-md-3 col-sm-12 col-xs-12">
-                    <!-- dashboard-->
                     {% include "includes/v_sidebar.html" %}
                 </div>
                 <div class="col-lg-9 col-md-9 col-sm-12 col-xs-12">
@@ -97,6 +94,4 @@
     </div>
 </div>
 <!-- Main Section End -->
-
-
-{% endblock  %}
+{% endblock %}
