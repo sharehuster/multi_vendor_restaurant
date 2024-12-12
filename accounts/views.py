@@ -11,6 +11,9 @@ from django.contrib import messages, auth
 from django.contrib.auth.decorators import login_required, user_passes_test
 
 from django.core.exceptions import PermissionDenied
+
+from vendor.models import Vendor
+
 # Restrict the vendor from accessing the customer page
 def check_role_vendor(user):
     if user.role == 1:
@@ -195,6 +198,10 @@ def custDashboard(request):
 @login_required(login_url="login")
 @user_passes_test(check_role_vendor)
 def vendorDashboard(request):
+    #not use because context_processors
+    # vendor = Vendor.objects.get(user=request.user)
+    # context = { 'vendor': vendor,}
+
     return render(request, 'accounts/vendorDashboard.html')
 
 
